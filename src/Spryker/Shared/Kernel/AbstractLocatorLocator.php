@@ -25,20 +25,20 @@ abstract class AbstractLocatorLocator implements LocatorLocatorInterface
     protected $locator;
 
     /**
-     * @var self
+     * @var static[]
      */
-    private static $instance;
+    private static $instance = [];
 
     /**
      * @return \Spryker\Shared\Kernel\AbstractLocatorLocator|static
      */
     public static function getInstance()
     {
-        if (self::$instance === null) {
-            self::$instance = new static();
+        if (!isset(self::$instance[static::class])) {
+            self::$instance[static::class] = new static();
         }
 
-        return self::$instance;
+        return self::$instance[static::class];
     }
 
     final private function __construct()
